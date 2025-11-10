@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Qual delas é IA?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 40px;
+      font-size: 2.2em;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 60px;
+      gap: 40px;
+    }
+    .image-box {
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .image-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .vs {
+      font-size: 5em;
+      font-weight: bold;
+      color: #888;
+    }
+    .result {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: #222;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .wrong {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 Qual delas é IA?</h1>
+  <div class="container">
+    <div class="image-box" onclick="checkAnswer('real')">
+      <img src="{{ url_for('static', filename='img/real1.jpg') }}" alt="Imagem real">
+    </div>
+    <div class="vs">X</div>
+    <div class="image-box" onclick="checkAnswer('ai')">
+      <img src="{{ url_for('static', filename='img/ai1.jpg') }}" alt="Imagem IA">
+    </div>
+  </div>
+
+  <div class="result" id="resultText"></div>
+
+  <script>
+    function checkAnswer(choice) {
+      const result = document.getElementById("resultText");
+      if (choice === 'ai') {
+        result.innerHTML = "✅ Acertou! Essa é a imagem feita por IA!";
+        result.className = "result correct";
+      } else {
+        result.innerHTML = "❌ Errou! A imagem feita por IA era a da direita.";
+        result.className = "result wrong";
+      }
+    }
+  </script>
+</body>
+</html>

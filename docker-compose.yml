@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  game-web:
+    build: ./web
+    container_name: game_web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./web:/app
+    environment:
+      - FLASK_ENV=production
