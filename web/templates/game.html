@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Fase {{ fase }} - PolitiIA{% endblock %}
+{% block content %}
+  <h2>Fase {{ fase }}/10</h2>
+  <p>Essa imagem é real ou feita por IA?</p>
+
+  <div style="text-align:center;">
+    <img src="{{ url_for('static', filename='img/' + imagem) }}"
+         alt="Imagem do jogo"
+         width="320"
+         style="border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); margin-bottom:20px;">
+    <br>
+    <button onclick="window.location.href='{{ url_for('responder', resposta='real') }}'" style="margin-right:10px;">REAL</button>
+    <button onclick="window.location.href='{{ url_for('responder', resposta='ia') }}'">IA</button>
+  </div>
+{% endblock %}

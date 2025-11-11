@@ -1,7 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Resultado - PolitiIA{% endblock %}
+{% block title %}Resultado Final{% endblock %}
 {% block content %}
-  <h2>Parabéns!</h2>
-  <p>Você finalizou o desafio com pontuação: <strong>{{ score }}/10</strong></p>
+  <h2>Parabéns 🎯</h2>
+  <p>Você completou todas as {{ total }} fases!</p>
+  <p>Sua pontuação final: <strong>{{ score }}/{{ total }}</strong></p>
+
+  {% if score == total %}
+    <p>Excelente! Você é um detector de IA nato 🤖✨</p>
+  {% elif score >= 7 %}
+    <p>Ótimo desempenho! 👏</p>
+  {% else %}
+    <p>Continue praticando, o olhar crítico vem com o tempo 👀</p>
+  {% endif %}
+
   <a href="{{ url_for('index') }}"><button>Jogar Novamente</button></a>
 {% endblock %}

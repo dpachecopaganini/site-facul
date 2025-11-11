@@ -4,15 +4,20 @@
   <h2>Essa imagem é real ou feita por IA?</h2>
 
   <div style="text-align:center;">
-    <img src="{{ url_for('static', filename='img/' + options[0][1]) }}" 
-         alt="Imagem do jogo" 
-         width="300" 
+    <img src="{{ url_for('static', filename='img/' + options[0][1]) }}"
+         alt="Imagem do jogo"
+         width="300"
          style="border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); margin-bottom:20px;">
     <br>
-    <button onclick="alert('Você escolheu: REAL')" style="margin-right:10px;">REAL</button>
-    <button onclick="alert('Você escolheu: IA')">IA</button>
+
+    <button onclick="proximaFase('REAL')" style="margin-right:10px;">REAL</button>
+    <button onclick="proximaFase('IA')">IA</button>
   </div>
 
-  <br><br>
-  <a href="{{ url_for('game2') }}"><button>Próxima Fase →</button></a>
+  <script>
+    function proximaFase(resposta) {
+      // Aqui futuramente você pode registrar a resposta no backend
+      window.location.href = "{{ url_for('game2') }}";
+    }
+  </script>
 {% endblock %}

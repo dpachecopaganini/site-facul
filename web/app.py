@@ -1,45 +1,61 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-import random
+from flask import Flask, render_template, redirect, url_for, session
 
 app = Flask(__name__)
 app.secret_key = "secret-key-facemesh"
 
-pairs = [
-    ("real1.jpg", "ai1.jpg"),
-    ("real2.jpg", "ai2.jpg"),
-    ("real3.jpg", "ai3.jpg"),
+# 10 imagens e suas respostas corretas
+imagens = [
+    {"arquivo": "img1.jpg", "correta": "real"},
+    {"arquivo": "img2.jpg", "correta": "ia"},
+    {"arquivo": "img3.jpg", "correta": "real"},
+    {"arquivo": "img4.jpg", "correta": "ia"},
+    {"arquivo": "img5.jpg", "correta": "ia"},
+    {"arquivo": "img6.jpg", "correta": "real"},
+    {"arquivo": "img7.jpg", "correta": "ia"},
+    {"arquivo": "img8.jpg", "correta": "real"},
+    {"arquivo": "img9.jpg", "correta": "ia"},
+    {"arquivo": "img10.jpg", "correta": "real"},
 ]
 
 @app.route("/")
 def index():
+    session["fase"] = 1
+    session["score"] = 0
     return render_template("index.html")
 
-@app.route("/sobre")
-def sobre():
-    return render_template("sobre.html")
+@app.route("/game")
+def game():
+    fase = session.get("fase", 1)
+    if fase > len(imagens):
+        return redirect(url_for("final"))
 
-@app.route("/politica")
-def politica():
-    return render_template("politica.html")
+    imagem_atual = imagens[fase - 1]["arquivo"]
+    return render_template("game.html", imagem=imagem_atual, fase=fase)
 
-@app.route("/game1")
-def game1():
-    img_real, img_ai = random.choice(pairs)
-    options = [("Real", img_real), ("IA", img_ai)]
-    random.shuffle(options)
-    return render_template("game1.html", options=options)
+@app.route("/responder/<resposta>")
+def responder(resposta):
+    fase = session.get("fase", 1)
 
-@app.route("/game2")
-def game2():
-    img_real, img_ai = random.choice(pairs)
-    options = [("Real", img_real), ("IA", img_ai)]
-    random.shuffle(options)
-    return render_template("game2.html", options=options)
+    # Evita erro se ultrapassar a última fase
+    if fase > len(imagens):
+        return redirect(url_for("final"))
+
+    correta = imagens[fase - 1]["correta"]
+
+    # Compara resposta do jogador com a correta
+    if resposta == correta:
+        session["score"] = session.get("score", 0) + 1
+
+    # Avança para próxima fase
+    session["fase"] = fase + 1
+
+    return redirect(url_for("game"))
 
 @app.route("/final")
 def final():
-    return render_template("final.html", score=random.randint(0,10))
+    score = session.get("score", 0)
+    total = len(imagens)
+    return render_template("final.html", score=score, total=total)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
-

@@ -2,28 +2,55 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}PolitiIA{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background-color: #0d6efd;
+      color: white;
+      padding: 15px;
+      font-size: 1.5em;
+      font-weight: bold;
+      position: fixed;
+      width: 100%;
+      top: 0;
+    }
+    main {
+      margin-top: 90px;
+      padding: 20px;
+    }
+    footer {
+      background-color: #0d6efd;
+      color: white;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background-color: #0b5ed7;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    🧠 PolitiIA — O Desafio da Inteligência Artificial
-  </header>
-
-  <div class="sidebar">
-    <a href="{{ url_for('index') }}">🏠 Início</a>
-    <a href="{{ url_for('sobre') }}">ℹ️ Sobre</a>
-    <a href="{{ url_for('politica') }}">🧾 Política de Privacidade</a>
-    <a href="{{ url_for('game1') }}">🎮 Jogo</a>
-  </div>
-
-  <main>
-    {% block content %}{% endblock %}
-  </main>
-
-  <footer>
-    © 2025 PolitiIA — Projeto Educacional sobre IA e Realidade
-  </footer>
+  <header>🧠 PolitiIA — O Desafio da Inteligência Artificial</header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>© 2025 PolitiIA — Projeto Educacional</footer>
 </body>
 </html>
-
