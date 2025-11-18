@@ -1,8 +1,77 @@
 {% extends "base.html" %}
-{% block title %}Sobre - PoliticIA{% endblock %}
+{% block title %}Sobre - PoliticIA: Não caia na mentira. Caia na real.{% endblock %}
 {% block content %}
-  <h2>Sobre o Projeto</h2>
-  <p><strong>PoliticIA</strong> é um jogo educativo criado para ajudar as pessoas a entenderem e reconhecerem
-     o impacto das imagens geradas por Inteligência Artificial na era da desinformação.</p>
-  <p>O objetivo é simples: identificar se a imagem exibida é real ou feita por IA.</p>
+
+  <h2>Sobre - <span style="color:#0052cc;">PoliticIA: Não caia na mentira. Caia na real.</span></h2>
+
+  <div class="sobre-container">
+    <img src="{{ url_for('static', filename='img/time.jpg') }}" alt="Time PoliticIA" class="time-img">
+
+    <p>
+      Este projeto foi desenvolvido para a disciplina de <strong>Informática e Sociedade</strong> do
+      <strong>Curso Superior de Tecnologia em Redes de Computadores</strong> do
+      <strong>Instituto Federal Catarinense - IFC, Campus Sombrio</strong>.
+    </p>
+
+    <p>
+      Diante do cenário de desinformação e do avanço das ferramentas de inteligência artificial,
+      apresentamos o <strong>PoliticIA</strong>, um jogo interativo que coloca o jogador no centro de
+      um desafio cada vez mais real: <strong>separar o fato da ficção</strong>.
+    </p>
+
+    <p>
+      O jogo apresenta uma seleção de imagens envolvendo personalidades brasileiras que estão em
+      evidência no cenário político contemporâneo. A missão do jogador é simples:
+      identificar quais imagens são reais e quais são montagens geradas por IA.
+    </p>
+
+    <p>
+      Mais do que um jogo, o <strong>PoliticIA</strong> é uma ferramenta de conscientização.
+      Ao final de cada partida, um ranking de pontuação estimula a competição saudável e o aprendizado.
+      Além disso, o jogo é acompanhado por um questionário de pesquisa integrado, cujo objetivo é coletar
+      a percepção dos jogadores, avaliando a eficácia do jogo e compreendendo o impacto da experiência no discernimento do jogador.
+    </p>
+
+    <p>
+      Este projeto é mais que um jogo — é um instrumento que estimula o
+      <strong>exercício da cidadania digital</strong> e a <strong>checagem crítica de conteúdos</strong>
+      que circulam nas redes sociais digitais.
+    </p>
+  </div>
+
+  <style>
+    .sobre-container {
+      text-align: justify;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-size: 1.05em;
+      color: #333;
+    }
+
+    .time-img {
+      display: block;
+      margin: 20px auto 30px auto;
+      max-width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: #111;
+    }
+
+    @media (max-width: 768px) {
+      .sobre-container {
+        padding: 0 15px;
+        font-size: 1em;
+      }
+
+      .time-img {
+        max-width: 100%;
+      }
+    }
+  </style>
+
 {% endblock %}

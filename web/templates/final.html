@@ -1,17 +1,51 @@
 {% extends "base.html" %}
-{% block title %}Resultado - PoliticIA{% endblock %}
+{% block title %}Resultado Final{% endblock %}
 {% block content %}
-  <h2>Parabéns 🎯</h2>
-  <p>Você completou todas as 10 fases!</p>
-  <p>Sua pontuação final: <strong>{{ score }}/{{ total }}</strong></p>
+  <h2>🎯 Resultado Final</h2>
+  <p>Sua pontuação foi:</p>
+  <h3><strong>{{ score }}/{{ total }}</strong></h3>
 
   {% if score == total %}
     <p>Excelente! Você é um detector de IA nato 🤖✨</p>
   {% elif score >= 7 %}
     <p>Ótimo desempenho! 👏</p>
   {% else %}
-    <p>Continue praticando — o olhar crítico vem com o tempo 👀</p>
+    <p>Continue praticando, o olhar crítico vem com o tempo 👀</p>
   {% endif %}
 
-  <a href="{{ url_for('index') }}"><button>Jogar Novamente</button></a>
+  <button class="btn-retangular" onclick="window.location.href='{{ url_for('index') }}'">
+    <img src="{{ url_for('static', filename='img/jogar.ico') }}" class="icon-btn">
+    Jogar Novamente
+  </button>
+
+  <style>
+    .btn-retangular {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #fa3563;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 30px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      transition: all 0.2s ease-in-out;
+      height: 55px;
+      min-width: 220px;
+    }
+
+    .btn-retangular:hover {
+      background-color: #d62e56;
+      transform: translateY(-2px);
+    }
+
+    .icon-btn {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Fase {{ fase }} - PoliticIA{% endblock %}
 {% block content %}
+
   <h2>Fase {{ fase }}/10</h2>
   <p>Essa imagem é real ou feita por IA?</p>
 
@@ -8,9 +9,57 @@
     <img src="{{ url_for('static', filename='img/' + imagem) }}"
          alt="Imagem do jogo"
          width="320"
-         style="border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); margin-bottom:20px;">
-    <br>
-    <button onclick="window.location.href='{{ url_for('responder', resposta='real') }}'" style="margin-right:10px;">REAL</button>
-    <button onclick="window.location.href='{{ url_for('responder', resposta='ia') }}'">IA</button>
+         style="border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); margin-bottom:25px;">
+
+    <div class="btn-container">
+      <button class="btn-game" onclick="window.location.href='{{ url_for('responder', resposta='real') }}'">
+        <img src="{{ url_for('static', filename='img/real.ico') }}" class="icon-btn">
+        REAL
+      </button>
+
+      <button class="btn-game" onclick="window.location.href='{{ url_for('responder', resposta='ia') }}'">
+        <img src="{{ url_for('static', filename='img/fake.ico') }}" class="icon-btn">
+        IA
+      </button>
+    </div>
   </div>
+
+  <style>
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn-game {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #fa3563;
+      color: #fff;
+      font-size: 1.05em;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      height: 55px;
+      min-width: 180px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .btn-game:hover {
+      background-color: #d62e56;
+      transform: translateY(-2px);
+    }
+
+    .icon-btn {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+
 {% endblock %}

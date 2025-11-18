@@ -1,7 +1,49 @@
 {% extends "base.html" %}
-{% block title %}Início - PolitiIA{% endblock %}
+{% block title %}Início - PoliticIA{% endblock %}
 {% block content %}
-  <h2>Bem-vindo ao PolitiIA</h2>
-  <p>Você consegue distinguir o que é real e o que foi feito por Inteligência Artificial?</p>
-  <a href="{{ url_for('game') }}"><button>Iniciar Jogo</button></a>
+
+  <img src="{{ url_for('static', filename='img/logo.ico') }}" 
+       alt="Logo PoliticIA"
+       style="width:120px; display:block; margin:30px auto 15px auto;">
+
+  <h2>Bem-vindo!</h2>
+  <p>Você consegue distinguir entre a imagem real e aquela que foi gerada por Inteligência Artificial?</p>
+
+  <button class="btn-retangular" onclick="window.location.href='{{ url_for('game') }}'">
+    <img src="{{ url_for('static', filename='img/jogar.ico') }}" alt="Jogar" class="icon-btn">
+    Jogar Agora
+  </button>
+
+  <style>
+    .btn-retangular {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background-color: #fa3563;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 30px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      transition: all 0.2s ease-in-out;
+      height: 55px;
+      min-width: 210px;
+    }
+
+    .btn-retangular:hover {
+      background-color: #d62e56;
+      transform: translateY(-2px);
+    }
+
+    .icon-btn {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+  </style>
+
 {% endblock %}

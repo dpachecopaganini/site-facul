@@ -5,16 +5,16 @@ app.secret_key = "secret-key-politicia"
 
 # 10 imagens com respostas corretas
 imagens = [
-    {"arquivo": "img1.jpg", "correta": "real"},
-    {"arquivo": "img2.jpg", "correta": "ia"},
-    {"arquivo": "img3.jpg", "correta": "real"},
+    {"arquivo": "img3.jpeg", "correta": "ia"},
     {"arquivo": "img4.jpg", "correta": "ia"},
-    {"arquivo": "img5.jpg", "correta": "real"},
-    {"arquivo": "img6.jpg", "correta": "ia"},
-    {"arquivo": "img7.jpg", "correta": "real"},
-    {"arquivo": "img8.jpg", "correta": "ia"},
-    {"arquivo": "img9.jpg", "correta": "real"},
-    {"arquivo": "img10.jpg", "correta": "ia"},
+    {"arquivo": "img5.jpeg", "correta": "ia"},
+    {"arquivo": "img7.jpeg", "correta": "ia"},
+    {"arquivo": "img1.jpg", "correta": "ia"},
+    {"arquivo": "img2.png", "correta": "real"},
+    {"arquivo": "img6.jpeg", "correta": "real"},
+    {"arquivo": "img8.jpeg", "correta": "real"},
+    {"arquivo": "img9.jpeg", "correta": "real"},
+    {"arquivo": "img10.png", "correta": "real"},
 ]
 
 @app.route("/")
@@ -27,7 +27,7 @@ def index():
 def game():
     fase = session.get("fase", 1)
     if fase > len(imagens):
-        return redirect(url_for("final"))
+        return redirect(url_for("forms"))  # redireciona pro formulário antes do final
 
     imagem_atual = imagens[fase - 1]["arquivo"]
     return render_template("game.html", imagem=imagem_atual, fase=fase)
@@ -36,7 +36,7 @@ def game():
 def responder(resposta):
     fase = session.get("fase", 1)
     if fase > len(imagens):
-        return redirect(url_for("final"))
+        return redirect(url_for("forms"))
 
     correta = imagens[fase - 1]["correta"]
     if resposta == correta:
@@ -44,6 +44,10 @@ def responder(resposta):
 
     session["fase"] = fase + 1
     return redirect(url_for("game"))
+
+@app.route("/forms")
+def forms():
+    return render_template("forms.html")
 
 @app.route("/final")
 def final():

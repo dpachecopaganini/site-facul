@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Pesquisa - PoliticIA{% endblock %}
+{% block content %}
+
+  <h2>Antes de ver o resultado final...</h2>
+  <p>Responda o formulário abaixo para ver seu resultado final.</p>
+
+  <div class="form-container" id="formContainer">
+    <div class="iframe-wrapper">
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSebxzbB_4I5Y_Cam4l8mhkC5du1yYU8qkAe_ht7Ab8fwiVBJA/viewform?embedded=true"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        allowfullscreen
+        loading="lazy">
+        Carregando formulário...
+      </iframe>
+    </div>
+  </div>
+
+  <br>
+  <!-- Aviso agora acima do botão -->
+  <p id="aviso" style="display:none;" class="aviso-msg">⚠️ Responda o formulário antes de ver o resultado.</p>
+
+  <button id="btnVerResultado">Ver Resultado Final</button>
+
+  <style>
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      height: 80vh;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .iframe-wrapper {
+        height: 85vh;
+        max-width: 100%;
+      }
+    }
+
+    #btnVerResultado {
+      background-color: #0052cc;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+
+    #btnVerResultado:hover {
+      background-color: #003d99;
+    }
+
+    .aviso-msg {
+      color: #c62828;
+      font-weight: bold;
+      margin-bottom: 10px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .aviso-visivel {
+      display: block !important;
+      opacity: 1 !important;
+    }
+  </style>
+
+  <script>
+    const LIMITE_TEMPO_SEGUNDOS = 15;
+    const URL_PAGINA_RESULTADO = "{{ url_for('final') }}";
+    const tempoInicial = Date.now();
+    const aviso = document.getElementById("aviso");
+    const formContainer = document.getElementById("formContainer");
+
+    document.getElementById('btnVerResultado').addEventListener('click', () => {
+      const tempoFinal = Date.now();
+      const tempoDecorrido = Math.floor((tempoFinal - tempoInicial) / 1000);
+
+      if (tempoDecorrido <= LIMITE_TEMPO_SEGUNDOS) {
+        // Mostra aviso com animação
+        aviso.classList.add("aviso-visivel");
+
+        // Scroll suave pro topo do formulário
+        formContainer.scrollIntoView({ behavior: 'smooth' });
+
+        // Oculta aviso depois de 3 segundos com fade-out
+        setTimeout(() => {
+          aviso.classList.remove("aviso-visivel");
+        }, 3000);
+      } else {
+        window.location.href = URL_PAGINA_RESULTADO;
+      }
+    });
+  </script>
+
+{% endblock %}

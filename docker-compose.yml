@@ -1,11 +1,17 @@
 version: "3.9"
+
 services:
-  game-web:
+  web:
     build: ./web
-    container_name: game_web
+    container_name: politicia_web
     ports:
-      - "8080:8080"
-    volumes:
-      - ./web:/app
+      - "8080:8080"         # mapeia a porta 8080 do host para o container
     environment:
       - FLASK_ENV=production
+    networks:
+      - politicia_net
+    restart: always
+
+networks:
+  politicia_net:
+    driver: bridge
