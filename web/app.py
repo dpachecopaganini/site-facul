@@ -17,6 +17,13 @@ imagens = [
     {"arquivo": "img10.png", "correta": "real"},
 ]
 
+#     Imanges novas para adicionar futuramente
+#    {"arquivo": "img11.png", "correta": "ia"},
+#    {"arquivo": "img12.png", "correta": "ia"},
+#    {"arquivo": "img13.png", "correta": "real"},
+#    {"arquivo": "img14.png", "correta": "real"},
+#    {"arquivo": "img15.png", "correta": "real"},
+ 
 @app.route("/")
 def index():
     session["fase"] = 1
